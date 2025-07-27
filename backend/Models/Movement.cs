@@ -7,7 +7,7 @@ using Microsoft.Net.Http.Headers;
 
 namespace backend.Models
 {
-    public class Moviment
+    public class Movement
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         public Guid PartId { get; set; }
@@ -15,7 +15,7 @@ namespace backend.Models
         public DateTime Date { get; set; } = DateTime.UtcNow;
         public string Responsible { get; set; }
 
-        public Moviment(Guid partId, Guid stationId, string responsible)
+        public Movement(Guid partId, Guid stationId, string responsible)
         {
             Id = Guid.NewGuid();
             PartId = partId;
