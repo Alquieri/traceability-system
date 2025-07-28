@@ -5,7 +5,7 @@ using backend.Repository;
 
 namespace backend.Services
 {
-    public class PartService
+    public class PartService : IPartService
     {
         private readonly IPartRepository _partRepository;
 
