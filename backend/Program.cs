@@ -1,9 +1,16 @@
-using System.Net.Security;
+
+using backend.Repository;
+using backend.Repository.InMemory;
+using backend.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.AddSingleton<PartService>();
+builder.Services.AddSingleton<IPartRepository, InMemoryPartRepository>();
+builder.Services.AddControllers(); 
+
 
 var app = builder.Build();
 
@@ -15,11 +22,12 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/hello-word", () =>
-{
-    return "Hello word!";
-})
 
-.WithOpenApi();
+app.MapGet("/hello-world", () =>
+{
+    return "Hello world!";
+});
+
+app.MapControllers();
 app.Run();
 
