@@ -19,5 +19,7 @@ namespace backend.Models
             Name = name;
             Number = number;
         }
+
+            public Station() {}
     }
 }

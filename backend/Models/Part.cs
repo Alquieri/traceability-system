@@ -11,12 +11,16 @@ namespace backend.Models
     {
         public Guid Id { get; set; }
         public string? Name { get; set; }
+        public string? Status { get; set; }
 
-
-        public Part(string name)
+        public Part(string name, String status)
         {
             Id = Guid.NewGuid();
             Name = name;
+            Status = status;
+
         }
+
+        public Part() {}
     }
 }

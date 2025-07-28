@@ -13,7 +13,7 @@ namespace backend.Models
         public Guid PartId { get; set; }
         public Guid StationId { get; set; }
         public DateTime Date { get; set; } = DateTime.UtcNow;
-        public string Responsible { get; set; }
+        public string? Responsible { get; set; }
 
         public Movement(Guid partId, Guid stationId, string responsible)
         {
@@ -23,6 +23,8 @@ namespace backend.Models
             Responsible = responsible;
             Date = DateTime.UtcNow;
         }
+        
+        public Movement() { }
 
       
     }

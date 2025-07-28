@@ -7,7 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-builder.Services.AddSingleton<PartService>();
+builder.Services.AddSingleton<IPartService, PartService>();
 builder.Services.AddSingleton<IPartRepository, InMemoryPartRepository>();
 builder.Services.AddControllers(); 
 
