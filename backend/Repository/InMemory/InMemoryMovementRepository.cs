@@ -6,7 +6,7 @@ using backend.Models;
 
 namespace backend.Repository.InMemory
 {
-    public class InMemoryMovementRepository
+    public class InMemoryMovementRepository : IMovementRepository
     {
         private readonly List<Movement> _movements = new(); //Finge que é um banco de dados
 
@@ -24,6 +24,21 @@ namespace backend.Repository.InMemory
 
             return result;
         }
+
+
+        public IEnumerable<Movement> GetByPartId(Guid partId)
+        {
+            var results = _movements.Where(m => m.PartId == partId);
+
+            if (!results.Any())
+                throw new Exception($"No movements found for part id '{partId}'.");
+
+            return results;
+        }
+
+
+
+
 
         public void Add(Movement movement)
         {

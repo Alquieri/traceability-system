@@ -9,6 +9,11 @@ namespace backend.Services
     {
         private readonly IStationRepository _StationRepository;
 
+        public IEnumerable<Station> GetAll()
+        {
+            return _StationRepository.GetAll();
+        }
+
 
         public StationService(IStationRepository stationRepository)
         {

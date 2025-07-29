@@ -4,9 +4,10 @@ namespace backend.Services
 {
     public interface IStationService
     {
+        IEnumerable<Station> GetAll();
         Station? GetById(Guid id);
-        void Create(Station part);
-        void Update(Station part);
+        void Create(Station station);
+        void Update(Station station);
         void Delete(Guid id);
         
     }

@@ -6,14 +6,16 @@ using backend.Models;
 
 namespace backend.Repository.InMemory
 {
-    public class InMemoryStationRepository
+    public class InMemoryStationRepository  : IStationRepository
     {
         private readonly List<Station> _station = new(); //Finge que é um banco de dados
 
-        public IEnumerable<Station> GetAll()
-        {
-            return _station;
-        }
+           public IEnumerable<Station> GetAll()
+            {
+                return _station;
+            }
+
+
 
         public Station GetById(Guid id)
         {
@@ -31,7 +33,7 @@ namespace backend.Repository.InMemory
 
         }
 
-        public void Updade(Station station)
+        public void Update(Station station)
         {
 
             var index = _station.FindIndex(s => s.Id == station.Id);
