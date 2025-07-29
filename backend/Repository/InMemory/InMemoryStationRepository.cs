@@ -8,12 +8,36 @@ namespace backend.Repository.InMemory
 {
     public class InMemoryStationRepository  : IStationRepository
     {
-        private readonly List<Station> _station = new(); //Finge que é um banco de dados
+        private readonly List<Station> _station = new();
 
-           public IEnumerable<Station> GetAll()
+        public InMemoryStationRepository()
+        {
+            _station.Add(new Station
             {
-                return _station;
-            }
+                Id = Guid.Parse("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa"),
+                Name = "Recebimento",
+                Number = 1
+            });
+
+            _station.Add(new Station
+            {
+                Id = Guid.Parse("bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"),
+                Name = "Montagem",
+                Number = 2
+            });
+
+            _station.Add(new Station
+            {
+                Id = Guid.Parse("cccccccc-cccc-cccc-cccc-cccccccccccc"),
+                Name = "Inspeção Final",
+                Number = 3
+            });
+        }
+        
+           public IEnumerable<Station> GetAll()
+        {
+            return _station;
+        }
 
 
 

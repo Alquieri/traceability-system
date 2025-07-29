@@ -1,14 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using backend.Models;
 using backend.Services;
 using Microsoft.AspNetCore.Mvc;
-using backend.Models;
+using backend.Dtos;
 
 namespace backend.Controlers
 {
-
     [ApiController]
     [Route("api/[controller]")]
     public class PartController : ControllerBase
@@ -19,8 +15,8 @@ namespace backend.Controlers
         {
             _partService = partService;
         }
-        [HttpGet]
 
+        [HttpGet]
         public IActionResult GetAll()
         {
             var parts = _partService.GetAll();
@@ -41,36 +37,42 @@ namespace backend.Controlers
             return part == null ? NotFound() : Ok(part);
         }
 
-
         [HttpPost]
-        public IActionResult Create([FromBody] Part part)
+        public IActionResult Create([FromBody] PartCreateDto partDto)
         {
-            try
+            // The part name is required.
+            if (string.IsNullOrWhiteSpace(partDto.Name))
             {
-                _partService.Create(part);
-                return Ok();
+                return BadRequest("Part name is required.");
             }
-            catch (Exception ex)
-            {
-                return BadRequest(ex.Message);
-            }
+
+            var newPart = new Part(partDto.Name);
+
+            _partService.Create(newPart);
+
+            return CreatedAtAction(nameof(GetById), new { id = newPart.Id }, newPart);
         }
 
-        [HttpPut]
-        public IActionResult Update([FromBody] Part part)
+        [HttpPut("{id}")]
+        public IActionResult Update(Guid id, [FromBody] Part part)
         {
+            // The route ID does not match the request body ID.
+            if (id != part.Id)
+            {
+                return BadRequest("Route ID does not match request body ID.");
+            }
+
             _partService.Update(part);
-            return Ok();
+
+            return NoContent();
         }
 
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             _partService.Delete(id);
-            return Ok();
+
+            return NoContent();
         }
-    
-
-
     }
 }

@@ -14,6 +14,14 @@ namespace backend.Controllers
             _stationRepository = stationRepository;
         }
 
+
+        [HttpGet]
+        public ActionResult<IEnumerable<Station>> GetAll()
+        {
+            var stations = _stationRepository.GetAll();
+            return Ok(stations);
+        }
+
         [HttpGet("{id}")]
         public ActionResult<Station> GetById(Guid id)
         {

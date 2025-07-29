@@ -10,6 +10,16 @@ namespace backend.Repository.InMemory
     {
         private readonly List<Part> _parts = new(); //Finge que é um banco de dados
 
+           public InMemoryPartRepository()
+        {
+            _parts.Add(new Part("Peça de Teste Principal")
+            {
+                Id = Guid.Parse("3fa85f64-5717-4562-b3fc-2c963f66afa6"),
+                CurrentStationId = null, 
+                Status = "Aguardando Recebimento"
+            });
+        }
+
         public IEnumerable<Part> GetAll()
         {
             return _parts;
