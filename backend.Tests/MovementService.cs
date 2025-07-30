@@ -33,7 +33,7 @@ namespace backend.Tests
         {
             var part = new Part("Peça Nova") { Id = Guid.NewGuid(), CurrentStationId = null };
             var station1 = new Station { Id = Guid.NewGuid(), Name = "Recebimento", Number = 1 };
-            var movement = new Movement { PartId = part.Id, StationId = station1.Id };
+            var movement = new Movement { PartId = part.Id, DestinationStationId = station1.Id };
 
             _partRepositoryMock.Setup(repo => repo.GetById(part.Id)).Returns(part);
             _stationRepositoryMock.Setup(repo => repo.GetById(station1.Id)).Returns(station1);
@@ -51,7 +51,7 @@ namespace backend.Tests
             var station1 = new Station { Id = Guid.NewGuid(), Name = "Recebimento", Number = 1 };
             var station3 = new Station { Id = Guid.NewGuid(), Name = "Inspeção", Number = 3 };
             var part = new Part("Peça em processo") { Id = Guid.NewGuid(), CurrentStationId = station1.Id };
-            var movement = new Movement { PartId = part.Id, StationId = station3.Id };
+            var movement = new Movement { PartId = part.Id, DestinationStationId = station3.Id };
 
             _partRepositoryMock.Setup(repo => repo.GetById(part.Id)).Returns(part);
             _stationRepositoryMock.Setup(repo => repo.GetById(station3.Id)).Returns(station3);
@@ -67,7 +67,7 @@ namespace backend.Tests
             var station2 = new Station { Id = Guid.NewGuid(), Name = "Montagem", Number = 2 };
             var station3 = new Station { Id = Guid.NewGuid(), Name = "Inspeção", Number = 3 };
             var part = new Part("Peça Quase Pronta") { Id = Guid.NewGuid(), CurrentStationId = station2.Id };
-            var movement = new Movement { PartId = part.Id, StationId = station3.Id };
+            var movement = new Movement { PartId = part.Id, DestinationStationId = station3.Id };
 
             _partRepositoryMock.Setup(repo => repo.GetById(part.Id)).Returns(part);
             _stationRepositoryMock.Setup(repo => repo.GetById(station3.Id)).Returns(station3);
@@ -86,7 +86,7 @@ namespace backend.Tests
             var station1 = new Station { Id = Guid.NewGuid(), Name = "Recebimento", Number = 1 };
             var station2 = new Station { Id = Guid.NewGuid(), Name = "Montagem", Number = 2 };
             var part = new Part("Peça em Montagem") { Id = Guid.NewGuid(), CurrentStationId = station2.Id };
-            var movement = new Movement { PartId = part.Id, StationId = station1.Id };
+            var movement = new Movement { PartId = part.Id, DestinationStationId = station1.Id };
 
             _partRepositoryMock.Setup(repo => repo.GetById(part.Id)).Returns(part);
             _stationRepositoryMock.Setup(repo => repo.GetById(station1.Id)).Returns(station1);
@@ -105,7 +105,7 @@ namespace backend.Tests
                 CurrentStationId = station3.Id, 
                 Status = "Finalizada"
             };
-            var movement = new Movement { PartId = part.Id, StationId = station3.Id };
+            var movement = new Movement { PartId = part.Id, DestinationStationId = station3.Id };
 
             _partRepositoryMock.Setup(repo => repo.GetById(part.Id)).Returns(part);
             _stationRepositoryMock.Setup(repo => repo.GetById(station3.Id)).Returns(station3);
