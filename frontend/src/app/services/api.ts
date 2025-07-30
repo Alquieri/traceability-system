@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-
 // --- INTERFACES ---
 export interface Part {
   id: string;
@@ -11,16 +10,22 @@ export interface Part {
   currentStationId: string | null;
 }
 
-export interface Station { // Nova interface para Estação
+export interface Station {
   id: string;
   name: string;
   number: number;
 }
 
-// Interface para os dados que enviaremos ao criar um movimento
 export interface MovementPayload {
   partId: string;
-  stationId: string;
+  destinationStationId : string;
+  responsible: string;
+}
+
+export interface Movement {
+  timestamp: Date;
+  originStationName: string;
+  destinationStationName: string;
   responsible: string;
 }
 
@@ -32,7 +37,7 @@ export class Api {
 
   constructor(private http: HttpClient) { }
 
-  // --- PART ---
+  // --- MÉTODOS DE PEÇA ---
   getParts(): Observable<Part[]> {
     return this.http.get<Part[]>(`${this.apiUrl}/api/Part`);
   }
@@ -41,12 +46,16 @@ export class Api {
     return this.http.post<Part>(`${this.apiUrl}/api/Part`, body);
   }
 
-  // --- STATION   ---
+  // --- MÉTODOS DE ESTAÇÃO E MOVIMENTO ---
   getStations(): Observable<Station[]> {
     return this.http.get<Station[]>(`${this.apiUrl}/api/Station`);
   }
-
   createMovement(payload: MovementPayload): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/api/Movement`, payload);
+  }
+
+  // --- MÉTODO DE HISTÓRICO ---
+  getHistoryByPartId(partId: string): Observable<Movement[]> {
+    return this.http.get<Movement[]>(`${this.apiUrl}/api/Movement/part/${partId}`);
   }
 }

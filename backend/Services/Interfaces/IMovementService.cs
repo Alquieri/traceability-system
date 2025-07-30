@@ -8,8 +8,6 @@ namespace backend.Services.Interfaces
         IEnumerable<Movement> GetAll();
         IEnumerable<Movement> GetByPartId(Guid partId);
         void Create(Movement movement);
-        Movement? GetLastByPart(Guid partId);
-
 
     }
 }

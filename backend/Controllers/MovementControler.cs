@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 using backend.Models;
+using backend.Repository;
 using backend.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -13,9 +11,11 @@ namespace backend.Controlers
     public class MovementController : ControllerBase
     {
         private readonly IMovementService _movementService;
-        public MovementController(IMovementService movementService)
+        private readonly IStationRepository _stationRepository;
+        public MovementController(IMovementService movementService, IStationRepository stationRepository)
         {
             _movementService = movementService;
+            _stationRepository = stationRepository;
         }
 
         [HttpGet]
@@ -23,12 +23,6 @@ namespace backend.Controlers
         public ActionResult<IEnumerable<Movement>> GetAll()
         {
             return Ok(_movementService.GetAll());
-        }
-
-        [HttpGet("part/{partId}")]
-        public ActionResult<IEnumerable<Movement>> GetByPartId(Guid partId)
-        {
-            return Ok(_movementService.GetByPartId(partId));
         }
 
 
@@ -45,6 +39,24 @@ namespace backend.Controlers
             {
                 return BadRequest(new { message = ex.Message });
             }
+        }
+
+        [HttpGet("part/{partId}")]
+        public IActionResult GetByPartId(Guid partId)
+        {
+            var movements = _movementService.GetByPartId(partId);
+            
+            var stations = _stationRepository.GetAll().ToDictionary(s => s.Id);
+
+ 
+            var historyResponse = movements.Select(m => new {
+                m.Timestamp,
+                OriginStationName = m.OriginStationId.HasValue ? stations[m.OriginStationId.Value].Name : null,
+                DestinationStationName = stations.ContainsKey(m.DestinationStationId) ? stations[m.DestinationStationId].Name : "Estação Desconhecida",
+                m.Responsible
+            }).OrderBy(m => m.Timestamp);
+
+            return Ok(historyResponse);
         }
 
 

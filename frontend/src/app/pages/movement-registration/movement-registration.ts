@@ -31,7 +31,7 @@ export class MovementRegistration implements OnInit {
       return;
     }
 
-    const payload: MovementPayload = { partId, stationId, responsible };
+    const payload: MovementPayload = { partId, destinationStationId: stationId, responsible };
 
     this.api.createMovement(payload).subscribe({
       next: () => {

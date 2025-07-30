@@ -1,1 +1,43 @@
-<p>part-history-viewer works!</p>
+<h2>Consultar Histórico da Peça</h2>
+
+<div>
+  <label for="part-select">Selecione a Peça:</label>
+  <select id="part-select" #partSelect (change)="searchHistory(partSelect.value)">
+    <option value="">Selecione...</option>
+    <option *ngFor="let part of parts" [value]="part.id">
+      {{ part.name }}
+    </option>
+  </select>
+</div>
+
+<div *ngIf="searched">
+  <hr>
+  <h3>Resultados</h3>
+
+  <p *ngIf="isLoading">Carregando...</p>
+
+  <div *ngIf="!isLoading && history.length > 0">
+    <table>
+      <thead>
+        <tr>
+          <th>Data</th>
+          <th>Origem</th>
+          <th>Destino</th>
+          <th>Responsável</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let move of history">
+          <td>{{ move.timestamp | date:'dd/MM/yyyy HH:mm' }}</td>
+          <td>{{ move.originStationName || 'N/A (Início)' }}</td>
+          <td>{{ move.destinationStationName }}</td>
+          <td>{{ move.responsible }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p *ngIf="!isLoading && history.length === 0">
+    Nenhum histórico de movimentação encontrado para esta peça.
+  </p>
+</div>

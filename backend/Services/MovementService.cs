@@ -1,6 +1,6 @@
-using backend.Services.Interfaces;
 using backend.Models;
 using backend.Repository;
+using backend.Services.Interfaces;
 
 namespace backend.Services
 {
@@ -26,11 +26,12 @@ namespace backend.Services
         {
             return _movementRepository.GetByPartId(partId);
         }
-
-        public void Create(Movement movement)
+        
+        public void Create(Movement movementFromRequest)
         {
-            var part = _partRepository.GetById(movement.PartId);
-            var destinationStation = _stationRepository.GetById(movement.StationId);
+            // 1. Busca as entidades principais
+            var part = _partRepository.GetById(movementFromRequest.PartId);
+            var destinationStation = _stationRepository.GetById(movementFromRequest.DestinationStationId);
 
             if (part == null || destinationStation == null)
             {
@@ -38,6 +39,17 @@ namespace backend.Services
             }
 
             ValidateMovement(part, destinationStation);
+
+            var newMovementRecord = new Movement
+            {
+                PartId = part.Id,
+                OriginStationId = part.CurrentStationId,
+                DestinationStationId = destinationStation.Id,
+                Responsible = movementFromRequest.Responsible,
+                Timestamp = DateTime.UtcNow
+            };
+            
+            _movementRepository.Add(newMovementRecord);
 
             part.CurrentStationId = destinationStation.Id;
             part.Status = destinationStation.Number switch
@@ -48,13 +60,6 @@ namespace backend.Services
                 _ => part.Status
             };
             _partRepository.Update(part);
-
-            _movementRepository.Add(movement);
-        }
-
-        public Movement? GetLastByPart(Guid partId)
-        {
-            return _movementRepository.GetLastByPart(partId);
         }
 
         private void ValidateMovement(Part part, Station destinationStation)
