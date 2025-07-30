@@ -23,4 +23,12 @@ export class Api {
   getParts(): Observable<Part[]> {
     return this.http.get<Part[]>(`${this.apiUrl}/api/Part`);
   }
+
+ 
+  createPart(partName: string): Observable<Part> {
+    const body = { name: partName };
+    return this.http.post<Part>(`${this.apiUrl}/api/Part`, body);
+  }
+
+
 }

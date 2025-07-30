@@ -11,3 +11,13 @@
 <ng-template #noParts>
   <p>Carregando peças ou nenhuma peça cadastrada...</p>
 </ng-template>
+
+<hr> <h3>Cadastrar Nova Peça</h3>
+<div>
+  <input #partNameInput type="text" placeholder="Nome da nova peça">
+
+  <button (click)="createPart(partNameInput.value); partNameInput.value=''">
+    Criar Peça
+  </button>
+</div>
+
