@@ -1,1 +1,30 @@
-<p>movement-registration works!</p>
+<h2>Registrar Movimentação de Peça</h2>
+
+<div>
+  <label for="part-select">Peça:</label>
+  <select id="part-select" #partSelect>
+    <option value="">Selecione uma peça...</option>
+    <option *ngFor="let part of parts" [value]="part.id">
+      {{ part.name }} (Status: {{ part.status }})
+    </option>
+  </select>
+</div>
+
+<div>
+  <label for="station-select">Mover para Estação:</label>
+  <select id="station-select" #stationSelect>
+    <option value="">Selecione uma estação...</option>
+    <option *ngFor="let station of stations" [value]="station.id">
+      {{ station.number }} - {{ station.name }}
+    </option>
+  </select>
+</div>
+
+<div>
+  <label for="responsible-input">Responsável:</label>
+  <input type="text" id="responsible-input" placeholder="Seu nome" #responsibleInput>
+</div>
+
+<button (click)="movePart(partSelect.value, stationSelect.value, responsibleInput.value)">
+  Registrar Movimento
+</button>
