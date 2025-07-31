@@ -1,1 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+
+/* --- AJUSTE GERAL DE TAMANHO --- */
+html {
+  font-size: 95%;
+}
+
+
+
+/* ADICIONADO ESPAÇAMENTO AQUI */
+nav {
+  display: flex;
+  gap: 0.5rem; /* Adiciona um pequeno espaço entre os links */
+  margin-top: 1rem;
+  margin-bottom: 2rem; /* Aumentamos o espaço abaixo da nav */
+}
+
+/* Estilo base dos links */
+nav a {
+  flex-grow: 1; /* Faz todos os links ocuparem o mesmo espaço */
+  text-align: center; /* Centraliza o texto */
+  padding: 0.75rem;
+  border-radius: var(--pico-border-radius);
+  text-decoration: none;
+  font-weight: 600; /* Texto um pouco mais forte */
+  background-color: var(--pico-muted-background-color);
+  color: var(--pico-contrast);
+  transition: all 0.2s ease-in-out;
+}
+
+/* Efeito ao passar o mouse */
+nav a:hover {
+  background-color: var(--pico-primary-hover);
+  color: var(--pico-primary-inverse);
+  transform: translateY(-2px); /* Efeito de "levantar" sutil */
+}
+
+
+/* --- ANIMAÇÕES SUTIS --- */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+main.container {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* src/styles.css */
+
+
+h2 {
+  position: relative;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--pico-primary);
+  padding-bottom: 0.5rem;
+  margin-bottom: 1.5rem;
+  border-bottom: 2px solid var(--pico-primary);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+select, button {
+  cursor: pointer;
+}

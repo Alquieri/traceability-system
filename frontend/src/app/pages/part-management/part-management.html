@@ -1,13 +1,5 @@
 <h2>Gerenciamento de Peças</h2>
 
-<div *ngIf="parts.length > 0; else noParts">
-  <ul>
-    <li *ngFor="let part of parts">
-      <strong>{{ part.name }}</strong> - Status: {{ part.status }}
-    </li>
-  </ul>
-</div>
-
 <ng-template #noParts>
   <p>Carregando peças ou nenhuma peça cadastrada...</p>
 </ng-template>
@@ -21,3 +13,19 @@
   </button>
 </div>
 
+<hr>
+
+<h3>Peças Cadastradas</h3>
+
+<div *ngIf="parts.length > 0; else noPartsTemplate">
+  <article *ngFor="let part of parts">
+    <header>
+      <strong>{{ part.name }}</strong>
+    </header>
+    Status atual: <i>{{ part.status }}</i>
+  </article>
+</div>
+
+<ng-template #noPartsTemplate>
+  <p>Nenhuma peça cadastrada.</p>
+</ng-template>
