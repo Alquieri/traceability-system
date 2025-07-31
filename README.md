@@ -1,9 +1,10 @@
 # Sistema de Rastreabilidade de Peças 🏭
 
-![.NET](https://img.shields.io/badge/.NET-8-blueviolet)  
-![Angular](https://img.shields.io/badge/Angular-17-red)
+![Status](https://img.shields.io/badge/status-concluído-green) ![.NET](https://img.shields.io/badge/.NET-8-blueviolet) ![Angular](https://img.shields.io/badge/Angular-17-red)  
 
-> Status do Projeto: Desenvolvimento
+
+
+> Status do Projeto: Concluído ✔️
 
 ## 📝 Descrição
 
@@ -26,14 +27,14 @@ Este projeto é um sistema full-stack para a rastreabilidade de peças industria
 ## 🛠️ Tecnologias Utilizadas
 
 ### Back-end:
-- .NET (versão 6 ou superior)
+- .NET 8
 - ASP.NET Core Web API
 - xUnit (para testes unitários)
 - Moq (para mocking)
 
 
 ### Front-end:
-- Angular (versão 15 ou superior)
+- Angular 20
 - TypeScript
 - HTML5 / CSS3
 
@@ -46,9 +47,9 @@ Este projeto é um sistema full-stack para a rastreabilidade de peças industria
 ## 🚀 Como Rodar o Projeto
 
 ### Pré-requisitos:
-- .NET SDK (versão 6 ou superior)
+- .NET SDK
 - Node.js (que inclui o npm)
-- Angular CLI (versão 15 ou superior)
+- Angular CLI
 
 ### 1. Clone o repositório:
 ```bash
@@ -76,7 +77,7 @@ npm install
 # Inicie o servidor de desenvolvimento
 ng serve --open
 ```
-A aplicação estará acessível em http://localhost:4200.
+### A aplicação estará acessível em http://localhost:4200.
 ---
 
 
